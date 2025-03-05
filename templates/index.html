@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+<body>
+    <!-- Заголовок -->
+    <h1>DataHunter</h1>
+
+    <!-- Основной контейнер -->
+    <div class="container">
+        <!-- Подзаголовок -->
+        <div class="subheader">
+            Вы работаете с тестовой средой: <strong>{{hostname}}</strong>
+            <a href="/auth/logout" style="float: right;">Выйти</a>
+        </div>
+
+        <!-- Вкладки -->
+        <div class="tabs">
+            <div class="tab active" data-tab="tab1">Создать зацепку</div>
+            <div class="tab" data-tab="tab2">Найти зацепку</div>
+        </div>
+
+        <!-- Содержимое первой вкладки -->
+        <div id="tab1" class="tab-content active">
+            <label>Выберите источник:</label>
+
+            <!-- Вложенные вкладки -->
+            <div class="nested-tabs">
+                <div class="nested-tab active" data-nested-tab="nested-tab1">Личный кабинет</div>
+                <div class="nested-tab" data-nested-tab="nested-tab2">World</div>
+                <div class="nested-tab" data-nested-tab="nested-tab3">Feedback</div>
+            </div>
+
+            <!-- Содержимое вложенных вкладок -->
+            <div id="nested-tab1" class="nested-tab-content active">
+                <br><br>
+
+                <!-- Выпадающее меню "Тип изменения" -->
+                <label for="change_type"><strong>Тип изменения:</strong></label>
+                <select id="change_type" name="change_type" required>
+                    <option value="" disabled selected>Выберите тип изменения</option>
+                    <option value="Новая орг-ция">Новая орг-ция</option>
+                    <option value="Обновить данные орг-ции">Обновить данные орг-ции</option>
+                    <option value="Организация не найдена">Организация не найдена</option>
+                </select>
+                <br><br><br>
+
+                <!-- Выпадающее меню Проект -->
+                <label for = "change_branch"><strong>Проект:</strong></label>
+                <select id="change_branch" name="change_branch" style="width: 250px;">
+                    <option value="" disabled selected></option>
+                    <option value="1267230100684807">Новосибирск</option>
+                    <option value="2393130007528228">Альметьевск</option>
+                    <option value="70030076173894530">Эр-Рияд</option>
+                </select>
+
+                <!-- Элемент ввода "Название" -->
+                <!--<label for="organization_name"><strong>Название:</strong></label>
+                <input type="text" id="organization_name" name="organization_name" placeholder="название организации" required>
+                <a href="" style="">рандом</a>-->
+                <br><br><br>
+
+                <!-- Элемент ввода "Связать с карточкой" -->
+                <label for="link_to_card"><strong>Карточка:</strong></label>
+                <input type="number" id="link_to_card" name="link_to_card" min="1">
+                <br><br><br>
+
+
+
+                <!-- Кнопка с идентификатором -->
+                <!--<button id="create-hook-button" type="button" disabled>Создать зацепку</button> -->
+                <button id="create-vorwand-button" type="button">Создать зацепку</button>
+                <br><br>
+
+                <!-- Элемент для отображения результата -->
+                <label for="generated-id"><strong>Результат:</strong></label>
+                <input type="text" id="generated-id" name="generated-id" placeholder="ID зацепки" readonly>
+
+                <!-- Ссылка на Юлу с id="vorwand-link" -->
+                <a id="vorwand-link" href="https://{{ hostname }}/vorwand#/id=#" target="_blank" rel="noopener noreferrer" style="display: none;">Открыть в Юле</a>
+
+
+
+            </div>
+
+            <div id="nested-tab2" class="nested-tab-content">
+                <h3>Содержимое "World"</h3>
+                <p>Это содержимое вкладки "World".</p>
+            </div>
+
+            <div id="nested-tab3" class="nested-tab-content">
+                <h3>Содержимое "Feedback"</h3>
+                <p>Это содержимое вкладки "Feedback".</p>
+            </div>
+        </div>
+
+        <!-- Содержимое второй вкладки -->
+        <div id="tab2" class="tab-content">
+            <h2>Содержимое вкладки 2</h2>
+            <p>Это содержимое второй вкладки.</p>
+        </div>
+
+        <!-- Подключение скриптов -->
+        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+        <script>
+            const sessionCookies = "{{ session.get('cookie', '') }}";
+            const sessionHostname = "{{ session.get('hostname', '') }}";
+        </script>
+        <!-- Передаём hostname в JavaScript -->
+        <script>
+            const sessionHostname = "{{ hostname }}";  // ✅ Передаём hostname из Flask
+        </script>
+
+        <!-- Подключаем Select2 для скролинга -->
+        <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet"/>
+        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    </div>
+</body>
+</html>

@@ -1,0 +1,212 @@
+/* Общие стили для страницы */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Заголовок сервиса */
+h1 {
+    margin-top: 20px;
+    font-size: 36px;
+    color: #333;
+}
+
+/* Кнопка "Создать зацепку" */
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-left: 20px; /* Отступ слева */
+            margin-bottom: 20px; /* Отступ снизу */
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+/* Контейнер для всей страницы */
+.container {
+    width: 90%;
+    max-width: 1400px;
+    margin: 20px auto;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+/* Стили для надписи "Вы работаете с тестовой средой" */
+.subheader {
+    padding: 10px 20px;
+    background-color: #f1f1f1;
+    border-bottom: 1px solid #ccc;
+    font-size: 16px;
+    color: #555;
+}
+
+/* Ссылки, например, для кнопки "Выйти" */
+a {
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+/* Стили для вкладок */
+.tabs {
+    display: flex;
+    border-bottom: 2px solid #ccc;
+    cursor: pointer;
+    justify-content: space-around;
+    background-color: #f9f9f9; /*#FF0000 - красный*/
+}
+
+.tab {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    background-color: #f1f1f1;
+    font-weight: bold;
+    text-align: center;
+    flex: 1;
+}
+
+.tab.active {
+    background-color: #fff;
+    font-weight: bold;
+    /*border-top-left-radius: 10px;*/
+    /*border-top-right-radius: 10px;*/
+    border-bottom: 2px solid #007BFF /*подчеркиваем активную табу*/
+}
+
+.tab:hover {
+    background-color: #ddd;
+}
+
+/* Стили для содержимого вкладок */
+.tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-top: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+/* Стили для текста внутри вкладок */
+.tab-content h2 {
+    font-size: 24px;
+    color: #333;
+}
+
+.tab-content p {
+    font-size: 16px;
+    color: #555;
+}
+
+/*=====*/
+/* Стили для вложенных вкладок */
+.nested-tabs {
+    display: flex;
+    border-bottom: 2px solid #ccc;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.nested-tab {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    background-color: #f1f1f1;
+    margin-right: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.nested-tab.active {
+    background-color: #fff;
+    font-weight: bold;
+    border-bottom: 2px solid #fff;
+}
+
+.nested-tab:hover {
+    background-color: #ddd;
+}
+
+/* Стили для содержимого вложенных вкладок */
+.nested-tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-top: none;
+}
+
+.nested-tab-content.active {
+    display: block;
+}
+
+/* Стили для вложенных вкладок */
+.nested-tabs {
+    display: flex;
+    border-bottom: 2px solid #ccc;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+.nested-tab {
+    padding: 10px 20px;
+    border: 1px solid #ccc;
+    border-bottom: none;
+    background-color: #f1f1f1;
+    margin-right: 5px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.nested-tab.active {
+    background-color: #fff;
+    font-weight: bold;
+    border-bottom: 2px solid #007BFF;
+}
+
+.nested-tab:hover {
+    background-color: #ddd;
+}
+
+/* Стили для содержимого вложенных вкладок */
+.nested-tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-top: none;
+}
+
+.nested-tab-content.active {
+    display: block;
+}
+
+/* Логика блокировки некоторых веб-элементов */
+.disabled-style {
+    color: gray; /* Делаем текст серым */
+    opacity: 0.5; /* Уменьшаем прозрачность */
+    pointer-events: none; /* Отключаем взаимодействие */
+}

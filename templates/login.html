@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column; /* Размещаем элементы вертикально */
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            position: relative;
+        }
+
+        .service-name {
+            position: absolute;
+            top: 20px; /* Располагаем название сверху */
+            left: 20px; /* Располагаем название слева */
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        form {
+            border: 1px solid #ccc;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            background-color: #fff;
+        }
+
+        input, select, button {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .error {
+            color: red;
+            background-color: #ffe6e6;
+            padding: 10px;
+            border: 1px solid red;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /* Стили для лоадера */
+        .loader {
+            display: none; /* Скрыт по умолчанию */
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid #ccc;
+            border-top: 5px solid #007BFF;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Название сервиса -->
+    <div class="service-name">DataHunter</div>
+
+    <!-- Анимация загрузки -->
+    <div class="loader" id="loader" style="display: none;">
+        <div class="spinner"></div>
+    </div>
+
+    <!-- Форма авторизации -->
+    <form id="login-form" method="POST" action="/auth/login">
+        <h2>Авторизация</h2>
+
+        <!-- Блок для отображения ошибок -->
+        {% if error %}
+        <div class="error">{{ error }}</div>
+        {% endif %}
+
+        <!-- Поле для ввода логина -->
+        <label for="username">Логин:</label>
+        <input type="text" id="username" name="username" placeholder="Введите логин" title="Имя пользователя без «@»" required>
+
+        <!-- Поле для ввода пароля -->
+        <label for="password">Пароль:</label>
+        <input type="password" id="password" name="password" placeholder="Введите пароль" title="Введите ваш пароль" required>
+
+        <!-- Выпадающее меню для выбора тестовой среды -->
+        <label for="hostname">Выберите тестовую среду:</label>
+        <select id="hostname" name="hostname" required>
+            <option value="Eagle">Eagle</option>
+            <option value="Meduza">Meduza</option>
+            <option value="Lynx">Lynx</option>
+            <option value="Unicorn">Unicorn</option>
+            <option value="Oryx">Oryx</option>
+            <option value="Rhino">Rhino</option>
+            <option value="Triton">Triton</option>
+            <option value="Turtle">Turtle</option>
+            <option value="Pioner">Pioner</option>
+        </select>
+
+        <!-- Кнопка отправки -->
+        <button type="submit">Войти</button>
+    </form>
+
+    <script>
+        // Получаем ссылку на форму и лоадер
+        const loginForm = document.getElementById('login-form');
+        const loader = document.getElementById('loader');
+
+        // Добавляем обработчик события на отправку формы
+        loginForm.addEventListener('submit', function () {
+            // Показываем лоадер
+            loader.style.display = 'flex';
+        });
+    </script>
+</body>
+</html>
