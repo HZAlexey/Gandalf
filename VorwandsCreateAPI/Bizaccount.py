@@ -25,7 +25,7 @@ class BizAccount:
             "xml": f"""<?xml version="1.0"?>
             <BizaccountVorwandRequestExtended Type="Create" CityCode="{city_code}"
             ContactPersonName="Testing" 
-            ContactPersonEmail="87781319332">
+            ContactPersonEmail="8778131{random_num}">
                 <Name Name="New organization {random_num}"/>
                 <Contacts>
                     <Contact ModificationType="Create" ContactType="Email" Value="test@mail.ru"/>
