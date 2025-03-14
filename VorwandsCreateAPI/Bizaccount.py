@@ -23,44 +23,42 @@ class BizAccount:
         if rubrics is None:
             rubrics = []  # Если rubrics не переданы, делаем пустой список
 
-        random_num = self.prepare_phone()
-
-        # Генерируем XML для рубрик (если они есть)
+        # 🔹 Генерируем XML для рубрик (если есть)
         rubrics_xml = ""
-        if rubrics:
+        if rubrics:  # ✅ Rubrics добавляется только если они есть
             rubrics_xml = "<Rubrics>\n"
             for rubric in rubrics:
                 rubrics_xml += f'    <Rubric ModificationType="Create" Code="{rubric}"/>\n'
             rubrics_xml += "</Rubrics>\n"
 
-            # Формируем XML-запрос
-            data = {
-                "xml": f"""<?xml version="1.0"?>
-                                <BizaccountVorwandRequestExtended Type="Create" CityCode="{city_code}">
-                                    {rubrics_xml if rubrics else ""}
-                                    <Name Name="Viking Coffee"/>
-                                    <Contacts>
-                                        <Contact ModificationType="Create" ContactType="Email" Value="vladimir.malov.88@mail.ru"/>
-                                        <Contact ModificationType="Create" ContactType="Phone" Value="9277921333" CountryCode="1"/>
-                                    </Contacts>
-                                    <Schedules>
-                                        <Schedule ModificationType="Update" Comment="" IsTemporarilyClosed="false">
-                                            <Day Label="Fri" From="09:00:00" To="18:00:00"/>
-                                            <Day Label="Mon" From="09:00:00" To="18:00:00"/>
-                                            <Day Label="Sat" From="09:00:00" To="18:00:00"/>
-                                            <Day Label="Sun"/>
-                                            <Day Label="Thu" From="09:00:00" To="18:00:00"/>
-                                            <Day Label="Tue" From="09:00:00" To="18:00:00"/>
-                                            <Day Label="Wed" From="09:00:00" To="18:00:00"/>
-                                        </Schedule>
-                                    </Schedules>
-                                </BizaccountVorwandRequestExtended>"""
-            }
+        # ✅ Формируем XML-запрос (даже если нет рубрик)
+        data = {
+            "xml": f"""<?xml version="1.0"?>
+        <BizaccountVorwandRequestExtended Type="Create" CityCode="{city_code}">
+        {rubrics_xml}
+            <Name Name="Viking Coffee"/>
+            <Contacts>
+                <Contact ModificationType="Create" ContactType="Email" Value="vladimir.malov.88@mail.ru"/>
+                <Contact ModificationType="Create" ContactType="Phone" Value="9277921333" CountryCode="1"/>
+            </Contacts>
+            <Schedules>
+                <Schedule ModificationType="Update" Comment="" IsTemporarilyClosed="false">
+                    <Day Label="Fri" From="09:00:00" To="18:00:00"/>
+                    <Day Label="Mon" From="09:00:00" To="18:00:00"/>
+                    <Day Label="Sat" From="09:00:00" To="18:00:00"/>
+                    <Day Label="Sun"/>
+                    <Day Label="Thu" From="09:00:00" To="18:00:00"/>
+                    <Day Label="Tue" From="09:00:00" To="18:00:00"/>
+                    <Day Label="Wed" From="09:00:00" To="18:00:00"/>
+                </Schedule>
+            </Schedules>
+        </BizaccountVorwandRequestExtended>"""
+        }
 
-            # ✅ Логируем XML перед отправкой
-
-            print("🔹 Сформированный XML:")
-            print(data)  # ✅ Логируем XML перед отправкой
+        # ✅ Проверяем XML перед отправкой
+        print("\n🔹 ОТПРАВЛЯЕМ XML:")
+        print(data["xml"])
+        print("🔹 КОНЕЦ XML\n")
 
             #return {"xml": data}  # Теперь возвращаем XML в JSON-объекте
 
