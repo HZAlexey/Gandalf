@@ -1,6 +1,6 @@
 import requests
 import datetime
-from flask import session  # Используем session для hostname
+from flask import session, url_for  # Используем session для hostname
 
 class BizAccount:
     def prepare_phone(self):
@@ -10,28 +10,59 @@ class BizAccount:
         random_num = f"{now[16:20]}"
         return random_num #phone
 
-    def bizaccount_create_vorwands(self, cookies, city_code):
+    def bizaccount_create_vorwands(self, cookies, city_code, rubrics=None):
 
         # Получаем hostname из session
         hostname = session.get('hostname')
         if not hostname:
             raise ValueError("Ошибка: hostname отсутствует в session. Пользователь не выбрал тестовую среду.")
 
-        # Подготовка данных <Contact ModificationType="Create" ContactType="Phone" Value="{phone}"/>
+        # Подготовка данных
+        data = None  # Инициализируем переменную
+
+        if rubrics is None:
+            rubrics = []  # Если rubrics не переданы, делаем пустой список
+
         random_num = self.prepare_phone()
 
+        # Генерируем XML для рубрик (если они есть)
+        rubrics_xml = ""
+        if rubrics:
+            rubrics_xml = "<Rubrics>\n"
+            for rubric in rubrics:
+                rubrics_xml += f'    <Rubric ModificationType="Create" Code="{rubric}"/>\n'
+            rubrics_xml += "</Rubrics>\n"
 
-        data = {
-            "xml": f"""<?xml version="1.0"?>
-            <BizaccountVorwandRequestExtended Type="Create" CityCode="{city_code}"
-            ContactPersonName="Testing" 
-            ContactPersonEmail="8778131{random_num}">
-                <Name Name="New organization {random_num}"/>
-                <Contacts>
-                    <Contact ModificationType="Create" ContactType="Email" Value="test@mail.ru"/>
-                </Contacts>
-            </BizaccountVorwandRequestExtended>"""
-        }
+            # Формируем XML-запрос
+            data = {
+                "xml": f"""<?xml version="1.0"?>
+                                <BizaccountVorwandRequestExtended Type="Create" CityCode="{city_code}">
+                                    {rubrics_xml if rubrics else ""}
+                                    <Name Name="Viking Coffee"/>
+                                    <Contacts>
+                                        <Contact ModificationType="Create" ContactType="Email" Value="vladimir.malov.88@mail.ru"/>
+                                        <Contact ModificationType="Create" ContactType="Phone" Value="9277921333" CountryCode="1"/>
+                                    </Contacts>
+                                    <Schedules>
+                                        <Schedule ModificationType="Update" Comment="" IsTemporarilyClosed="false">
+                                            <Day Label="Fri" From="09:00:00" To="18:00:00"/>
+                                            <Day Label="Mon" From="09:00:00" To="18:00:00"/>
+                                            <Day Label="Sat" From="09:00:00" To="18:00:00"/>
+                                            <Day Label="Sun"/>
+                                            <Day Label="Thu" From="09:00:00" To="18:00:00"/>
+                                            <Day Label="Tue" From="09:00:00" To="18:00:00"/>
+                                            <Day Label="Wed" From="09:00:00" To="18:00:00"/>
+                                        </Schedule>
+                                    </Schedules>
+                                </BizaccountVorwandRequestExtended>"""
+            }
+
+            # ✅ Логируем XML перед отправкой
+
+            print("🔹 Сформированный XML:")
+            print(data)  # ✅ Логируем XML перед отправкой
+
+            #return {"xml": data}  # Теперь возвращаем XML в JSON-объекте
 
         # Заголовки с куками
         headers = {
@@ -46,12 +77,16 @@ class BizAccount:
 
         try:
             response = requests.post(url, json=data, headers=headers)
-            response.raise_for_status()
 
-            # Пробуем получить JSON
+            if response.status_code == 401:
+                print("❌ Ошибка 401: Неавторизованный доступ. Перенаправление на страницу входа.")
+                session.pop("cookie", None)  # Удаляем куки из сессии
+                return {"redirect": url_for("auth.login")}, 401  # Возвращаем редирект
+
+            response.raise_for_status()
             Vorwand_result = response.json()
             print("✅ Ответ сервера:", Vorwand_result)
-            return Vorwand_result  # Возвращаем результат
+            return Vorwand_result
 
         except requests.exceptions.RequestException as e:
             print("❌ Ошибка при отправке запроса:", e)
@@ -68,7 +103,7 @@ class BizAccount:
             "xml": f"""<?xml version="1.0"?>
             <BizaccountVorwandRequestExtended Type="Update" FirmCode="{firm_code}" CardCode="{card_code}">
                 <Rubrics>
-                    <Rubric ModificationType="Delete" Code="110358"/>
+                    <Rubric ModificationType="Create" Code="110358"/>
                 </Rubrics>
                 <Address Address="Даяна Мурзина, 7/1" BuildingSyncode="70030076269813188"/>
                 <Contacts>
@@ -90,6 +125,12 @@ class BizAccount:
 
         try:
             response = requests.post(url, json=data, headers=headers)
+
+            if response.status_code == 401:
+                print("❌ Ошибка 401: Неавторизованный доступ. Перенаправление на страницу входа.")
+                session.pop("cookie", None)  # Удаляем куки из сессии
+                return {"redirect": url_for("auth.login")}, 401  # Возвращаем редирект
+
             response.raise_for_status()
             Vorwand_result = response.json()
             print("✅ Ответ сервера:", Vorwand_result)

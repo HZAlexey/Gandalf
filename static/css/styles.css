@@ -32,6 +32,21 @@ h1 {
             background-color: #0056b3;
         }
 
+/* Кнопка "+ Добавить рубрику" */
+.add-rubric {
+    color: #007BFF; /* Цвет ссылки */
+    cursor: pointer; /* Курсор в виде руки */
+    font-size: 16px; /* Размер текста */
+    margin-left: 20px; /* Отступ слева */
+    margin-bottom: 20px; /* Отступ снизу */
+    display: inline-block; /* Чтобы отступы работали нормально */
+}
+
+.add-rubric:hover {
+    color: #0056b3; /* Темнее при наведении */
+}
+
+
 /* Контейнер для всей страницы */
 .container {
     width: 90%;
@@ -210,3 +225,28 @@ a:hover {
     opacity: 0.5; /* Уменьшаем прозрачность */
     pointer-events: none; /* Отключаем взаимодействие */
 }
+
+/*радио-бокс Тип изменения*/
+.radio-group {
+    display: flex;
+    gap: 15px; /* Расстояние между элементами */
+}
+
+
+/* оформление для рубрик */
+.rubric-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .rubric-group select {
+            width: 300px;
+        }
+        .remove-rubric {
+            margin-left: 10px;
+            /*background: black;*/
+            color: red;
+            border: none;
+            /*padding: 5px 10px;*/
+            cursor: pointer;
+        }
