@@ -130,19 +130,25 @@ document.addEventListener("DOMContentLoaded", function () {
             return;
         }
 
-            // 🔹 Собираем выбранные рубрики
+        // 🔹 Собираем выбранные рубрики и
         let selectedRubrics = [];
-        $('.rubric-select').each(function() {
-            let rubricId = $(this).val();
+        $('.rubric-group').each(function() {
+            let rubricId = $(this).find('.rubric-select').val();
+            let action = $(this).find('.rubric-action').val();  // "Create" или "Delete"
+
             if (rubricId) {
-                selectedRubrics.push(rubricId);
+                selectedRubrics.push({ "id": rubricId, "action": action });
             }
         });
 
-        console.log("📌 Отправляем данные:", { city_code: selectedCityCode, rubrics: selectedRubrics });
+        console.log("📌 Перед отправкой rubrics:", selectedRubrics);  // ✅ Логируем перед отправкой
+
 
         let apiUrl;
-        let requestData = { city_code: selectedCityCode };
+        let requestData = {
+        city_code: selectedCityCode,
+        rubrics: selectedRubrics
+        };
 
         // 🔹 Добавляем рубрики в запрос, только если они есть
         if (selectedRubrics.length > 0) {
@@ -160,6 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
             resetButton();
             return;
         }
+
 
         try {
             const response = await fetch(apiUrl, {
@@ -247,7 +254,13 @@ $(document).ready(function() {
 
     // Добавление нового поля рубрики
     $('#add-rubric').click(function() {
+        let rubricCount = $('.rubric-group').length + 1;  // Делаем уникальное имя для radio
+
         let newRubric = $('<div class="rubric-group">' +
+            '<select class="rubric-action" style="width: 100px;">' +
+                    '<option value="Create" selected>Добавить</option>' +
+                    '<option value="Delete">Удалить</option>' +
+            '</select>' +
             '<select class="rubric-select" name="rubrics[]" style="width: 300px;"></select>' +
             '<span class="remove-rubric">✖</span>' +
             '</div>');
@@ -255,7 +268,7 @@ $(document).ready(function() {
         $('#rubrics-container').append(newRubric);
         initSelect2(newRubric.find('.rubric-select'));
 
-        // Показываем кнопку удаления у новых элементов
+    // Показываем кнопку удаления у новых элементов
         newRubric.find('.remove-rubric').show();
     });
 
@@ -263,26 +276,29 @@ $(document).ready(function() {
     $(document).on('click', '.remove-rubric', function() {
         $(this).parent().remove();
     });
+
     // 🔹 Собираем ID рубрик перед отправкой формы
     $('#submit-form').click(function() {
     let selectedRubrics = [];
 
-    // Собираем выбранные рубрики
-    $('.rubric-select').each(function() {
-        let rubricId = $(this).val();  // Получаем ID рубрики
+    // Собираем выбранные рубрики и их действия
+    $('.rubric-group').each(function() {
+        let rubricId = $(this).find('.rubric-select').val();  // Получаем ID рубрики
+        let action = $(this).find('.rubric-action').val();  // "Create" или "Delete"
+
         if (rubricId) {
-            selectedRubrics.push(rubricId);
+            selectedRubrics.push({ "id": rubricId, "action": action });  // ✅ Теперь отправляется объект
         }
     });
 
-    let selectedCityCode = $('#change_branch').val(); // Получаем city_code из формы
+    let selectedCityCode = $('#change_branch').val();
 
     if (!selectedCityCode) {
         alert("Пожалуйста, выберите город!");
         return;
     }
 
-    console.log("📌 Отправляем данные:", { city_code: selectedCityCode, rubrics: selectedRubrics });
+    console.log("📌 Перед отправкой rubrics:", selectedRubrics);  // ✅ Логируем перед отправкой
 
     // Отправляем данные на сервер
     $.ajax({
@@ -291,7 +307,7 @@ $(document).ready(function() {
         contentType: "application/json",
         data: JSON.stringify({
             city_code: selectedCityCode,
-            rubrics: selectedRubrics  // ✅ Теперь всегда отправляем `rubrics`
+            rubrics: selectedRubrics
         }),
         success: function(response) {
             console.log("✅ Ответ сервера:", response);

@@ -4,13 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c1d6ab89-cb29-4858-ba44-b040ffa26107" name="Changes" comment="- рубрики можно добавить по честному из БД&#10;- динамически фрмируется список рубрик + UI">
+    <list default="true" id="c1d6ab89-cb29-4858-ba44-b040ffa26107" name="Changes" comment="Теперь если не указывать рубрику, то зацепка создается без ошибок">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VorwandsCreateAPI/111.py" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/VorwandsCreateAPI/Bizaccount.py" beforeDir="false" afterPath="$PROJECT_DIR$/VorwandsCreateAPI/Bizaccount.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VorwandsCreateAPI/feedback_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/VorwandsCreateAPI/Feedback.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VorwandsCreateAPI/test_bizaccount.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/VorwandsCreateAPI/world_handler.py" beforeDir="false" afterPath="$PROJECT_DIR$/VorwandsCreateAPI/World.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VorwandsCreateAPI/test.py" beforeDir="false" afterPath="$PROJECT_DIR$/VorwandsCreateAPI/test.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,7 +98,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741966652614</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Теперь если не указывать рубрику, то зацепка создается без ошибок">
+      <option name="closed" value="true" />
+      <created>1741967557999</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1741967558000</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -148,6 +155,7 @@
   <component name="VcsManagerConfiguration">
     <MESSAGE value="random_num в персональном номере телефона" />
     <MESSAGE value="- рубрики можно добавить по честному из БД&#10;- динамически фрмируется список рубрик + UI" />
-    <option name="LAST_COMMIT_MESSAGE" value="- рубрики можно добавить по честному из БД&#10;- динамически фрмируется список рубрик + UI" />
+    <MESSAGE value="Теперь если не указывать рубрику, то зацепка создается без ошибок" />
+    <option name="LAST_COMMIT_MESSAGE" value="Теперь если не указывать рубрику, то зацепка создается без ошибок" />
   </component>
 </project>

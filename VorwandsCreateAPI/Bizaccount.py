@@ -12,24 +12,31 @@ class BizAccount:
 
     def bizaccount_create_vorwands(self, cookies, city_code, rubrics=None):
 
+        phone = self.prepare_phone()
+
         # Получаем hostname из session
         hostname = session.get('hostname')
         if not hostname:
             raise ValueError("Ошибка: hostname отсутствует в session. Пользователь не выбрал тестовую среду.")
 
-        # Подготовка данных
-        data = None  # Инициализируем переменную
-
-        if rubrics is None:
-            rubrics = []  # Если rubrics не переданы, делаем пустой список
-
         # 🔹 Генерируем XML для рубрик (если есть)
         rubrics_xml = ""
-        if rubrics:  # ✅ Rubrics добавляется только если они есть
+        print("📌 Полученные rubrics:", rubrics)  # ✅ Логируем входные данные
+
+        if rubrics:
             rubrics_xml = "<Rubrics>\n"
+
             for rubric in rubrics:
-                rubrics_xml += f'    <Rubric ModificationType="Create" Code="{rubric}"/>\n'
+                # ✅ Проверяем, что rubric — это словарь с ключами "id" и "action"
+                if isinstance(rubric, dict) and "id" in rubric and "action" in rubric:
+                    rubric_id = rubric["id"]
+                    action = rubric["action"]  # "Create" или "Delete"
+                    rubrics_xml += f'    <Rubric ModificationType="{action}" Code="{rubric_id}"/>\n'
+                else:
+                    print(f"❌ Ошибка: Некорректный формат рубрики: {rubric}")  # Логируем ошибку
+
             rubrics_xml += "</Rubrics>\n"
+
 
         # ✅ Формируем XML-запрос (даже если нет рубрик)
         data = {
@@ -39,7 +46,7 @@ class BizAccount:
             <Name Name="Viking Coffee"/>
             <Contacts>
                 <Contact ModificationType="Create" ContactType="Email" Value="vladimir.malov.88@mail.ru"/>
-                <Contact ModificationType="Create" ContactType="Phone" Value="9277921333" CountryCode="1"/>
+                <Contact ModificationType="Create" ContactType="Phone" Value="{phone}" CountryCode="1"/>
             </Contacts>
             <Schedules>
                 <Schedule ModificationType="Update" Comment="" IsTemporarilyClosed="false">

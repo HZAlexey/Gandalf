@@ -1,31 +1,46 @@
-import pyodbc
+def update_vorwand_request(self, cookies, firm_code, card_code):
+    hostname = session.get('hostname')
+    if not hostname:
+        raise ValueError("Ошибка: hostname отсутствует в session. Пользователь не выбрал тестовую среду.")
 
-def get_firm_syncode(card_syncode):
-    """Получает FirmSyncode по card_syncode"""
+    phone = self.prepare_phone()
+
+    data = {
+        "xml": f"""<?xml version="1.0"?>
+        <BizaccountVorwandRequestExtended Type="Update" FirmCode="{firm_code}" CardCode="{card_code}">
+            <Rubrics>
+                <Rubric ModificationType="Create" Code="110358"/>
+            </Rubrics>
+            <Address Address="Даяна Мурзина, 7/1" BuildingSyncode="70030076269813188"/>
+            <Contacts>
+                <Contact ModificationType="Create" ContactType="Phone" Value="{phone}" CountryCode="1"
+                Description="Заместитель директора"/>
+            </Contacts>
+        </BizaccountVorwandRequestExtended>"""
+    }
+
+    headers = {
+        "Content-Type": "application/json; charset=utf-8",
+        "Cookie": cookies
+    }
+
+    url = f"http://{hostname}/api/Vorwands/Create/BizAccount/Extended"
+
+    print(f"🚀 Отправка запроса UPDATE на {url}")
+    print(f"📜 Данные запроса: {data}")
+
     try:
-        with pyodbc.connect(
-            "Driver={SQL Server Native Client 11.0};"
-            "Server=uk-rhinosql;"
-            "Database=Youla.Rhino;"
-            "Trusted_Connection=yes;"
-        ) as cnxn:
-            with cnxn.cursor() as curs:
-                curs.execute(
-                    ''' 
-                    SELECT FirmSyncode 
-                    FROM [reference].[Cards] 
-                    WHERE Syncode = ?  
-                    ''',
-                    (card_syncode,)  # ✅ Передаем параметр
-                )
-                row = curs.fetchone()
-                return row[0] if row else None
+        response = requests.post(url, json=data, headers=headers)
 
-    except Exception as e:
-        print("❌ Ошибка подключения к БД или выполнения запроса:", e)
+        if response.status_code == 401:
+            print("❌ Ошибка 401: Неавторизованный доступ. Перенаправление на страницу входа.")
+            session.pop("cookie", None)  # Удаляем куки из сессии
+            return {"redirect": url_for("auth.login")}, 401  # Возвращаем редирект
+
+        response.raise_for_status()
+        Vorwand_result = response.json()
+        print("✅ Ответ сервера:", Vorwand_result)
+        return Vorwand_result
+    except requests.exceptions.RequestException as e:
+        print("❌ Ошибка при отправке запроса:", e)
         return None
-
-# ✅ Тестируем конкретное значение
-syncode_test = 70000001006577638
-firm_syncode = get_firm_syncode(syncode_test)
-print(f"✅ Полученный FirmSyncode для {syncode_test}: {firm_syncode}")
