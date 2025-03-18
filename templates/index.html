@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная страница</title>
+
     <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+    <!-- Подключаем jQuery и Select2 -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
 </head>
 <body>
     <!-- Заголовок -->
@@ -43,15 +48,16 @@
                 <label for="change_type"><strong>Тип изменения:</strong></label>
                 <select id="change_type" name="change_type" required>
                     <option value="" disabled selected>Выберите тип изменения</option>
-                    <option value="Новая орг-ция">Новая орг-ция</option>
-                    <option value="Обновить данные орг-ции">Обновить данные орг-ции</option>
-                    <option value="Организация не найдена">Организация не найдена</option>
+                    <option value = "Новая орг-ция" > Новая орг-ция</option>
+                    <option value = "Обновить данные орг-ции" > Обновить данные орг-ции</option>
+                    <option value = "Организация не найдена" > Организация не найдена</option>
                 </select>
+                <!-- Заголовок -->
                 <br><br><br>
 
                 <!-- Выпадающее меню Проект -->
                 <label for = "change_branch"><strong>Проект:</strong></label>
-                <select id="change_branch" name="change_branch" style="width: 250px;">
+                <select id="change_branch" name="change_branch" style="width: 300px;">
                     <option value="" disabled selected></option>
                     <option value="1267230100684807">Новосибирск</option>
                     <option value="2393130007528228">Альметьевск</option>
@@ -64,16 +70,35 @@
                 <a href="" style="">рандом</a>-->
                 <br><br><br>
 
-                <!-- Элемент ввода "Связать с карточкой" -->
+                <!-- Элемент ввода "Карточка" -->
                 <label for="link_to_card"><strong>Карточка:</strong></label>
-                <input type="number" id="link_to_card" name="link_to_card" min="1">
+                <input type="number" id="link_to_card" name="link_to_card" placeholder="Syncode" min="1">
+                <br><br><br>
+
+
+                <label for="rubrics-container"><strong>Рубрики:</strong></label><br><br>
+                <div id="rubrics-container">
+                    <!-- Первый блок выбора рубрик -->
+                    <div class="rubric-group">
+                        <select class="rubric-action" style="width: 80px; margin-right: 10px;">
+                            <option value="Create" selected>Создать</option>
+                            <option value="Delete">Удалить</option>
+                        </select>
+                        <select class="rubric-select" name="rubrics[]" style="width: 300px;"></select>
+                        <span class="remove-rubric" style="display: none;">✖</span>
+                    </div>
+                </div>
+
+                <!-- Кнопка добавления нового поля -->
+                <span id="add-rubric" class="add-rubric">+ добавить рубрику</span>
                 <br><br><br>
 
 
 
+
                 <!-- Кнопка с идентификатором -->
-                <!--<button id="create-hook-button" type="button" disabled>Создать зацепку</button> -->
                 <button id="create-vorwand-button" type="button">Создать зацепку</button>
+                <button id="view-vorwand-button" type="button">Посмотреть запрос</button>
                 <br><br>
 
                 <!-- Элемент для отображения результата -->
@@ -82,7 +107,6 @@
 
                 <!-- Ссылка на Юлу с id="vorwand-link" -->
                 <a id="vorwand-link" href="https://{{ hostname }}/vorwand#/id=#" target="_blank" rel="noopener noreferrer" style="display: none;">Открыть в Юле</a>
-
 
 
             </div>
@@ -104,20 +128,14 @@
             <p>Это содержимое второй вкладки.</p>
         </div>
 
-        <!-- Подключение скриптов -->
-        <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
-        <script>
-            const sessionCookies = "{{ session.get('cookie', '') }}";
-            const sessionHostname = "{{ session.get('hostname', '') }}";
-        </script>
         <!-- Передаём hostname в JavaScript -->
         <script>
-            const sessionHostname = "{{ hostname }}";  // ✅ Передаём hostname из Flask
+            const sessionHostname = "{{ hostname }}";
         </script>
 
-        <!-- Подключаем Select2 для скролинга -->
-        <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet"/>
-        <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+        <!-- Подключаем основной скрипт с defer -->
+        <script src="{{ url_for('static', filename='js/scripts.js') }}" defer></script>
+
     </div>
 </body>
 </html>

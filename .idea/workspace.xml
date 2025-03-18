@@ -4,27 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c1d6ab89-cb29-4858-ba44-b040ffa26107" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/pythonProject.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VorwandsCreateAPI/111.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VorwandsCreateAPI/Bizaccount.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VorwandsCreateAPI/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VorwandsCreateAPI/feedback_handler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VorwandsCreateAPI/test.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VorwandsCreateAPI/test_bizaccount.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VorwandsCreateAPI/world_handler.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/auth_routes.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/css/styles.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/scripts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/templates/login.html" afterDir="false" />
+    <list default="true" id="c1d6ab89-cb29-4858-ba44-b040ffa26107" name="Changes" comment="Теперь можно в запросе отправлять Создать или Удалить рубрику">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/css/styles.css" beforeDir="false" afterPath="$PROJECT_DIR$/static/css/styles.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -40,7 +24,15 @@
     </option>
   </component>
   <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="main" />
+      </map>
+    </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -51,20 +43,20 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "Python.111.executor": "Run",
-    "Python.app.executor": "Run",
-    "Python.auth_routes.executor": "Run",
-    "Python.main.executor": "Run",
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "C:/Users/al.zhuravlev/PycharmProjects/MyTestYouRa/YouLa/Tests",
-    "settings.editor.selected.configurable": "preferences.pluginManager"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;Python.111.executor&quot;: &quot;Run&quot;,
+    &quot;Python.app.executor&quot;: &quot;Run&quot;,
+    &quot;Python.auth_routes.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;feature/update__vorwands__rubric&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/al.zhuravlev/Documents/project/Gandalf&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;
   }
-}]]></component>
+}</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\al.zhuravlev\Documents\project\helper\pythonProject\static" />
@@ -89,6 +81,89 @@
       <option name="presentableId" value="Default" />
       <updated>1736504722548</updated>
     </task>
+    <task id="LOCAL-00001" summary="random_num в персональном номере телефона">
+      <option name="closed" value="true" />
+      <created>1741193518386</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1741193518386</updated>
+    </task>
+    <task id="LOCAL-00002" summary="- рубрики можно добавить по честному из БД&#10;- динамически фрмируется список рубрик + UI">
+      <option name="closed" value="true" />
+      <created>1741966652614</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1741966652614</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Теперь если не указывать рубрику, то зацепка создается без ошибок">
+      <option name="closed" value="true" />
+      <created>1741967557999</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1741967558000</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Теперь можно в запросе отправлять Создать или Удалить рубрику">
+      <option name="closed" value="true" />
+      <created>1742127654311</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1742127654311</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="feature/update_vorwands_rubric" />
+                </option>
+              </RecentGroup>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="feature/update_vorwands_rubric" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="random_num в персональном номере телефона" />
+    <MESSAGE value="- рубрики можно добавить по честному из БД&#10;- динамически фрмируется список рубрик + UI" />
+    <MESSAGE value="Теперь если не указывать рубрику, то зацепка создается без ошибок" />
+    <MESSAGE value="Теперь можно в запросе отправлять Создать или Удалить рубрику" />
+    <option name="LAST_COMMIT_MESSAGE" value="Теперь можно в запросе отправлять Создать или Удалить рубрику" />
   </component>
 </project>

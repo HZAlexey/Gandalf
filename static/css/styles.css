@@ -17,7 +17,7 @@ h1 {
 }
 
 /* Кнопка "Создать зацепку" */
-        button {
+        #create-vorwand-button {
             background-color: #007BFF;
             color: white;
             border: none;
@@ -28,9 +28,41 @@ h1 {
             margin-bottom: 20px; /* Отступ снизу */
         }
 
-        button:hover {
+        #create-vorwand-button:hover {
             background-color: #0056b3;
         }
+
+/* Кнопка "Посмотреть запрос" */
+
+        #view-vorwand-button {
+            background-color: gray; /* Серый цвет */
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            border-radius: 10px;
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        #view-vorwand-button:hover {
+            background-color: darkgray; /* Темнее при наведении */
+        }
+
+/* Кнопка "+ Добавить рубрику" */
+.add-rubric {
+    color: #007BFF; /* Цвет ссылки */
+    cursor: pointer; /* Курсор в виде руки */
+    font-size: 16px; /* Размер текста */
+    margin-left: 20px; /* Отступ слева */
+    margin-bottom: 20px; /* Отступ снизу */
+    display: inline-block; /* Чтобы отступы работали нормально */
+}
+
+.add-rubric:hover {
+    color: #0056b3; /* Темнее при наведении */
+}
+
 
 /* Контейнер для всей страницы */
 .container {
@@ -210,3 +242,22 @@ a:hover {
     opacity: 0.5; /* Уменьшаем прозрачность */
     pointer-events: none; /* Отключаем взаимодействие */
 }
+
+
+/* оформление для рубрик */
+.rubric-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+        .rubric-group select {
+            width: 300px;
+        }
+        .remove-rubric {
+            margin-left: 10px;
+            /*background: black;*/
+            color: red;
+            border: none;
+            /*padding: 5px 10px;*/
+            cursor: pointer;
+        }
