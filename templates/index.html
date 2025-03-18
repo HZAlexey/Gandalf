@@ -73,15 +73,15 @@
                 <!-- Элемент ввода "Карточка" -->
                 <label for="link_to_card"><strong>Карточка:</strong></label>
                 <input type="number" id="link_to_card" name="link_to_card" placeholder="Syncode" min="1">
-                <br><br><br> <br><br><br>
+                <br><br><br>
 
 
                 <label for="rubrics-container"><strong>Рубрики:</strong></label><br><br>
                 <div id="rubrics-container">
                     <!-- Первый блок выбора рубрик -->
                     <div class="rubric-group">
-                        <select class="rubric-action" style="width: 100px;">
-                            <option value="Create" selected>Добавить</option>
+                        <select class="rubric-action" style="width: 80px; margin-right: 10px;">
+                            <option value="Create" selected>Создать</option>
                             <option value="Delete">Удалить</option>
                         </select>
                         <select class="rubric-select" name="rubrics[]" style="width: 300px;"></select>
@@ -97,8 +97,8 @@
 
 
                 <!-- Кнопка с идентификатором -->
-                <!--<button id="create-hook-button" type="button" disabled>Создать зацепку</button> -->
                 <button id="create-vorwand-button" type="button">Создать зацепку</button>
+                <button id="view-vorwand-button" type="button">Посмотреть запрос</button>
                 <br><br>
 
                 <!-- Элемент для отображения результата -->

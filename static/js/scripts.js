@@ -257,8 +257,8 @@ $(document).ready(function() {
         let rubricCount = $('.rubric-group').length + 1;  // Делаем уникальное имя для radio
 
         let newRubric = $('<div class="rubric-group">' +
-            '<select class="rubric-action" style="width: 100px;">' +
-                    '<option value="Create" selected>Добавить</option>' +
+            '<select class="rubric-action" style="width: 80px; margin-right: 10px;">' +
+                    '<option value="Create" selected>Создать</option>' +
                     '<option value="Delete">Удалить</option>' +
             '</select>' +
             '<select class="rubric-select" name="rubrics[]" style="width: 300px;"></select>' +
