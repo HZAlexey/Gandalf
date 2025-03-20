@@ -98,8 +98,15 @@
 
                 <!-- Кнопка с идентификатором -->
                 <button id="create-vorwand-button" type="button">Создать зацепку</button>
+
+
                 <button id="view-vorwand-button" type="button">Посмотреть запрос</button>
                 <br><br>
+                <textarea id="xml-viewer" rows="15" cols="80" style="display: none;"></textarea>
+                <br>
+                <button id="send-edited-xml" type="button" style="display: none;">Создать зацепку</button>
+
+
 
                 <!-- Элемент для отображения результата -->
                 <label for="generated-id"><strong>Результат:</strong></label>
@@ -135,6 +142,7 @@
 
         <!-- Подключаем основной скрипт с defer -->
         <script src="{{ url_for('static', filename='js/scripts.js') }}" defer></script>
+        <script type="module" src="/static/js/main.js"></script>
 
     </div>
 </body>

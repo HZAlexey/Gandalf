@@ -113,7 +113,6 @@ def get_firm_syncode(card_syncode):
 @app.route("/api/create-vorwand", methods=["POST"])
 def create_vorwand():
     data = request.get_json()
-    print("🔹 Полученные данные:", data)  # ✅ Логируем входящие данные
     city_code = data.get("city_code")
     rubrics = data.get("rubrics", [])  # Получаем список рубрик
 
