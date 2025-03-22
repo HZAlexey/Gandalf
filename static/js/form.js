@@ -20,7 +20,6 @@ export function collectFormData() {
         }
     });
 
-    console.log("📌 Перед отправкой rubrics:", selectedRubrics);
 
     let requestData = { city_code: selectedCityCode, rubrics: selectedRubrics };
     if (changeType === "Обновить данные орг-ции") {

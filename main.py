@@ -145,6 +145,7 @@ def update_vorwand():
     data = request.get_json()
     #city_code = data.get("city_code")
     card_syncode = data.get("card_syncode")
+    rubrics = data.get("rubrics", [])  # Получаем список рубрик
 
     cookies = session.get("cookie", "")
     if not cookies:
@@ -159,7 +160,7 @@ def update_vorwand():
     biz = BizAccount()
     try:
         # 👇 Вызываем новый метод update_vorwand_request (Создадим его ниже)
-        response = biz.update_vorwand_request(cookies, firm_syncode, card_syncode)#, city_code)
+        response = biz.update_vorwand_request(cookies, firm_syncode, card_syncode, rubrics)
 
         if isinstance(response, tuple) and response[1] == 401:
             return jsonify(response[0]), 401  # Перенаправляем на страницу авторизации

@@ -1,41 +1,17 @@
+from flask import session, url_for
 import requests
-import datetime
-from flask import session, url_for  # Используем session для hostname
+from data import generate_rubrics_xml, prepare_phone
 
 class BizAccount:
-    def prepare_phone(self):
-        """Генерация уникального телефона"""
-        now = datetime.datetime.now().strftime("%m%d%Y%H%M%S%f")
-        phone = f"+7 (9{now[:2]}) {now[3:6]}-{now[6:8]}-{now[18:20]}"
-        random_num = f"{now[16:20]}"
-        return random_num #phone
-
     def bizaccount_create_vorwands(self, cookies, city_code, rubrics=None):
 
-        phone = self.prepare_phone()
-
-        # Получаем hostname из session
+        phone = prepare_phone()
         hostname = session.get('hostname')
         if not hostname:
             raise ValueError("Ошибка: hostname отсутствует в session. Пользователь не выбрал тестовую среду.")
 
         # 🔹 Генерируем XML для рубрик (если есть)
-        rubrics_xml = ""
-        print("📌 Полученные rubrics:", rubrics)  # ✅ Логируем входные данные
-
-        if rubrics:
-            rubrics_xml = "<Rubrics>\n"
-
-            for rubric in rubrics:
-                # ✅ Проверяем, что rubric — это словарь с ключами "id" и "action"
-                if isinstance(rubric, dict) and "id" in rubric and "action" in rubric:
-                    rubric_id = rubric["id"]
-                    action = rubric["action"]  # "Create" или "Delete"
-                    rubrics_xml += f'    <Rubric ModificationType="{action}" Code="{rubric_id}"/>\n'
-                else:
-                    print(f"❌ Ошибка: Некорректный формат рубрики: {rubric}")  # Логируем ошибку
-
-            rubrics_xml += "</Rubrics>\n"
+        rubrics_xml = generate_rubrics_xml(rubrics)
 
 
         # ✅ Формируем XML-запрос (даже если нет рубрик)
@@ -62,12 +38,8 @@ class BizAccount:
         </BizaccountVorwandRequestExtended>"""
         }
 
-        # ✅ Проверяем XML перед отправкой
-        print("\n🔹 ОТПРАВЛЯЕМ XML:")
-        print(data["xml"])
-        print("🔹 КОНЕЦ XML\n")
 
-            #return {"xml": data}  # Теперь возвращаем XML в JSON-объекте
+
 
         # Заголовки с куками
         headers = {
@@ -77,8 +49,11 @@ class BizAccount:
 
         # Формируем URL с hostname
         url = f"http://{hostname}/api/Vorwands/Create/BizAccount/Extended"
+
         print(f"🚀 Отправка запроса на {url}")
-        print(f"📜 Данные запроса: {data}")
+        print("\n🔹 ОТПРАВЛЯЕМ XML:")
+        print(data["xml"])
+        print("🔹 КОНЕЦ XML\n")
 
         try:
             response = requests.post(url, json=data, headers=headers)
@@ -97,19 +72,18 @@ class BizAccount:
             print("❌ Ошибка при отправке запроса:", e)
             return None
 
-    def update_vorwand_request(self, cookies, firm_code, card_code):
+    def update_vorwand_request(self, cookies, firm_code, card_code, rubrics=None):
         hostname = session.get('hostname')
         if not hostname:
             raise ValueError("Ошибка: hostname отсутствует в session. Пользователь не выбрал тестовую среду.")
 
-        phone = self.prepare_phone()
+        phone = prepare_phone()
+        rubrics_xml = generate_rubrics_xml(rubrics)
 
         data = {
             "xml": f"""<?xml version="1.0"?>
             <BizaccountVorwandRequestExtended Type="Update" FirmCode="{firm_code}" CardCode="{card_code}">
-                <Rubrics>
-                    <Rubric ModificationType="Create" Code="110358"/>
-                </Rubrics>
+                {rubrics_xml}
                 <Address Address="Даяна Мурзина, 7/1" BuildingSyncode="70030076269813188"/>
                 <Contacts>
                     <Contact ModificationType="Create" ContactType="Phone" Value="{phone}" CountryCode="1"
@@ -125,8 +99,10 @@ class BizAccount:
 
         url = f"http://{hostname}/api/Vorwands/Create/BizAccount/Extended"
 
-        #print(f"🚀 Отправка запроса UPDATE на {url}")
-        #print(f"📜 Данные запроса: {data}")
+        print(f"🚀 Отправка запроса на {url}")
+        print("\n🔹 ОТПРАВЛЯЕМ XML:")
+        print(data["xml"])
+        print("🔹 КОНЕЦ XML\n")
 
         try:
             response = requests.post(url, json=data, headers=headers)
