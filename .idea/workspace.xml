@@ -4,12 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c1d6ab89-cb29-4858-ba44-b040ffa26107" name="Changes" comment="рефакторинг кода из JS">
+    <list default="true" id="c1d6ab89-cb29-4858-ba44-b040ffa26107" name="Changes" comment="Появилось модальное окно, в котором будет появляться OriginValue">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VorwandsCreateAPI/Bizaccount.py" beforeDir="false" afterPath="$PROJECT_DIR$/VorwandsCreateAPI/Bizaccount.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/events.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/events.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/ui.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,6 +32,9 @@
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
@@ -122,7 +123,23 @@
       <option name="project" value="LOCAL" />
       <updated>1742308464580</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Появилось модальное окно, в котором будет появляться OriginValue">
+      <option name="closed" value="true" />
+      <created>1742645162485</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1742645162486</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Появилось модальное окно, в котором будет появляться OriginValue">
+      <option name="closed" value="true" />
+      <created>1742645218359</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1742645218359</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -174,6 +191,7 @@
     <MESSAGE value="Теперь если не указывать рубрику, то зацепка создается без ошибок" />
     <MESSAGE value="Теперь можно в запросе отправлять Создать или Удалить рубрику" />
     <MESSAGE value="Добавил кнопку просмотра сормировавшегося запроса" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавил кнопку просмотра сормировавшегося запроса" />
+    <MESSAGE value="Появилось модальное окно, в котором будет появляться OriginValue" />
+    <option name="LAST_COMMIT_MESSAGE" value="Появилось модальное окно, в котором будет появляться OriginValue" />
   </component>
 </project>

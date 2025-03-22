@@ -196,7 +196,7 @@ export function setupModal() {
     });
 }
 
-
+// логика скрывания меню действия с рубрикой, если выбран тип "Новая орг-ция"
 export function updateRubricVisibility() {
     const changeTypeSelect = document.getElementById("change_type");
     if (!changeTypeSelect) {

@@ -1,22 +1,72 @@
 import { createVorwand } from "./api.js";
 import { collectFormData } from "./form.js";
 import { resetButton, updateUIAfterCreation } from "./ui.js";
-import { showError } from "./ui.js";
 
 export function setupCreateVorwand() {
     const createVorwandButton = document.getElementById("create-vorwand-button");
+    const changeTypeSelect = document.getElementById("change_type");
+    const changeBranch = document.getElementById("change_branch");
+    const linkToCardInput = document.getElementById("link_to_card");
+
+    if (!createVorwandButton || !changeTypeSelect || !changeBranch || !linkToCardInput) {
+        console.error("❌ Ошибка: Один из элементов формы не найден.");
+        return;
+    }
+
+    function validateFields() {
+        const selectedChangeType = changeTypeSelect.value;
+
+        if (!selectedChangeType) {
+            alert("Пожалуйста, выберите 'Тип изменения'!");
+            return false;
+        }
+
+        if (selectedChangeType === "Новая орг-ция" && !changeBranch.value) {
+            alert("Пожалуйста, выберите 'Проект'!");
+            return false;
+        }
+
+        if (selectedChangeType === "Обновить данные орг-ции" && !linkToCardInput.value) {
+            alert("Пожалуйста, введите 'Карточку'!");
+            return false;
+        }
+
+        return true;
+    }
 
     createVorwandButton.addEventListener("click", async function () {
+        if (!validateFields()) return;
+
         createVorwandButton.disabled = true;
         createVorwandButton.textContent = "Ожидание...";
 
         try {
             const { requestData, changeType } = collectFormData();
-            const data = await createVorwand(requestData, changeType);
+            const response = await fetch(`/api/${changeType === "Новая орг-ция" ? "create-vorwand" : "update-vorwand"}`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify(requestData),
+            });
+
+            const data = await response.json();
+
+            if (response.status === 404) {
+                alert("Ошибка: Фирма не найдена!");
+                return;
+            }
+
+            if (!response.ok) {
+                throw new Error(data.error || "Неизвестная ошибка");
+            }
+
             updateUIAfterCreation(data);
         } catch (error) {
-            console.error("Ошибка при запросе:", error);
-            showError(error.message);
+            if (error.message.includes("Фирма не найдена")) {
+                alert(error.message);
+            } else {
+                console.error("Ошибка при запросе:", error);
+                alert("Ошибка: " + error.message);
+            }
         } finally {
             resetButton(createVorwandButton);
         }
@@ -76,6 +126,7 @@ export function setupFieldStateManagement() {
 
 
 // Собираем рубрики и события по ним, что бы указать это в запросе
+
 export function setupFormSubmission() {
     $(document).ready(function() {
         $('#submit-form').click(function() {
@@ -120,3 +171,28 @@ export function setupFormSubmission() {
         });
     });
 };
+
+// Логика скрытия пункта меню действия "Создать" / "Удалить" если выбран тип Новая орг-ция
+import { changeTypeSelect } from "./domElements.js";
+
+export function setupRubricVisibility() {
+    function updateRubricVisibility() {
+        const selectedChangeType = changeTypeSelect.value;
+        const rubricActions = document.querySelectorAll(".rubric-action");
+
+        if (selectedChangeType === "Новая орг-ция") {
+            rubricActions.forEach(action => {
+                action.style.display = "none";
+            });
+        } else {
+            rubricActions.forEach(action => {
+                action.style.display = "inline-block";
+            });
+        }
+    }
+
+    changeTypeSelect.addEventListener("change", updateRubricVisibility);
+
+    // Вызываем при загрузке страницы
+    updateRubricVisibility();
+}
