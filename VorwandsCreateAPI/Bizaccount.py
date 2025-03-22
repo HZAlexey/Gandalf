@@ -125,8 +125,8 @@ class BizAccount:
 
         url = f"http://{hostname}/api/Vorwands/Create/BizAccount/Extended"
 
-        print(f"🚀 Отправка запроса UPDATE на {url}")
-        print(f"📜 Данные запроса: {data}")
+        #print(f"🚀 Отправка запроса UPDATE на {url}")
+        #print(f"📜 Данные запроса: {data}")
 
         try:
             response = requests.post(url, json=data, headers=headers)

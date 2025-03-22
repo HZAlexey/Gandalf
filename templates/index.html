@@ -10,6 +10,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/js/select2.min.js"></script>
+    <!-- Подключаем основной JavaScript -->
+    <script type="module" src="/static/js/main.js"></script>
 </head>
 <body>
     <!-- Заголовок -->
@@ -93,20 +95,22 @@
                 <span id="add-rubric" class="add-rubric">+ добавить рубрику</span>
                 <br><br><br>
 
-
-
-
                 <!-- Кнопка с идентификатором -->
                 <button id="create-vorwand-button" type="button">Создать зацепку</button>
-
-
                 <button id="view-vorwand-button" type="button">Посмотреть запрос</button>
+
+
+                <!-- Контейнер для модального окна -->
+                <div id="modal-container" style="display: none;">
+                    <div class="modal-content">
+                        <h2>OriginValue:</h2>
+                        <textarea id="modal-text" rows="10" cols="100"></textarea>
+                        <button id="close-modal">Закрыть</button>
+                        <button id="save-modal">Сохранить</button>
+                    </div>
+                </div>
+
                 <br><br>
-                <textarea id="xml-viewer" rows="15" cols="80" style="display: none;"></textarea>
-                <br>
-                <button id="send-edited-xml" type="button" style="display: none;">Создать зацепку</button>
-
-
 
                 <!-- Элемент для отображения результата -->
                 <label for="generated-id"><strong>Результат:</strong></label>
@@ -141,8 +145,8 @@
         </script>
 
         <!-- Подключаем основной скрипт с defer -->
-        <script src="{{ url_for('static', filename='js/scripts.js') }}" defer></script>
-        <script type="module" src="/static/js/main.js"></script>
+        <!--<script src="{{ url_for('static', filename='js/scripts.js') }}" defer></script>-->
+        <!--<script type="module" src="/static/js/main.js"></script>-->
 
     </div>
 </body>

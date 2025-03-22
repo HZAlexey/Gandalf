@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c1d6ab89-cb29-4858-ba44-b040ffa26107" name="Changes" comment="Добавил кнопку просмотра сормировавшегося запроса">
-      <change afterPath="$PROJECT_DIR$/static/js/api.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/events.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/form.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/main.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/static/js/ui.js" afterDir="false" />
+    <list default="true" id="c1d6ab89-cb29-4858-ba44-b040ffa26107" name="Changes" comment="рефакторинг кода из JS">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/js/scripts.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/scripts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VorwandsCreateAPI/Bizaccount.py" beforeDir="false" afterPath="$PROJECT_DIR$/VorwandsCreateAPI/Bizaccount.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/ui.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

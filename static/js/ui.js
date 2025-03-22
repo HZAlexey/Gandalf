@@ -86,7 +86,7 @@ export function initRubricManagement() {
                 minimumInputLength: 2,
                 ajax: {
                     url: "/api/rubrics",
-                    dataType: 'json',
+                    dataType: "json",
                     delay: 250,
                     data: function (params) {
                         return { term: params.term };
@@ -99,30 +99,31 @@ export function initRubricManagement() {
         }
 
         // Инициализируем Select2 для первого поля
-        initSelect2('.rubric-select');
+        initSelect2(".rubric-select");
 
-        // Добавление нового поля рубрики
-        $('#add-rubric').click(function() {
-            let rubricCount = $('.rubric-group').length + 1;
-
+        // Обработчик кнопки "Добавить рубрику"
+        $("#add-rubric").click(function() {
             let newRubric = $('<div class="rubric-group">' +
-                '<select class="rubric-action" style="width: 100px;">' +
-                        '<option value="Create" selected>Создать</option>' +
-                        '<option value="Delete">Удалить</option>' +
+                '<select class="rubric-action" style="width: 80px; margin-right: 10px;">' +
+                    '<option value="Create" selected>Создать</option>' +
+                    '<option value="Delete">Удалить</option>' +
                 '</select>' +
                 '<select class="rubric-select" name="rubrics[]" style="width: 300px;"></select>' +
                 '<span class="remove-rubric">✖</span>' +
-                '</div>');
+            '</div>');
 
-            $('#rubrics-container').append(newRubric);
-            initSelect2(newRubric.find('.rubric-select'));
+            $("#rubrics-container").append(newRubric);
+            initSelect2(newRubric.find(".rubric-select"));
 
             // Показываем кнопку удаления у новых элементов
-            newRubric.find('.remove-rubric').show();
+            newRubric.find(".remove-rubric").show();
+
+            // Обновляем видимость выпадающего списка "Действие с рубрикой"
+            updateRubricVisibility();
         });
 
         // Удаление рубрики
-        $(document).on('click', '.remove-rubric', function() {
+        $(document).on("click", ".remove-rubric", function() {
             $(this).parent().remove();
         });
     });
@@ -162,4 +163,56 @@ export function showError(message, inputElement) {
             document.removeEventListener("click", hideError);
         }
     });
+};
+
+// Модальное окно с запросом OriginValue
+
+export function setupModal() {
+    const modalContainer = document.getElementById("modal-container");
+    const modalText = document.getElementById("modal-text");
+    const viewButton = document.getElementById("view-vorwand-button");
+    const closeButton = document.getElementById("close-modal");
+    const saveButton = document.getElementById("save-modal");
+
+    let savedText = ""; // Переменная для хранения текста
+
+    viewButton.addEventListener("click", function () {
+        if (modalContainer.style.display === "block") {
+            modalContainer.style.display = "none"; // Закрываем окно, если оно уже открыто
+        } else {
+            modalText.value = savedText || "Здесь будет ваш запрос..."; // Показываем сохраненный текст
+            modalContainer.style.display = "block"; // Открываем окно
+        }
+    });
+
+    closeButton.addEventListener("click", function () {
+        modalContainer.style.display = "none"; // Закрываем окно без сохранения
+    });
+
+    saveButton.addEventListener("click", function () {
+        savedText = modalText.value; // Сохраняем изменения
+        modalContainer.style.display = "none"; // Закрываем окно после сохранения
+        console.log("✅ Сохраненный текст:", savedText);
+    });
 }
+
+
+export function updateRubricVisibility() {
+    const changeTypeSelect = document.getElementById("change_type");
+    if (!changeTypeSelect) {
+        console.error("❌ Ошибка: Поле #change_type не найдено.");
+        return;
+    }
+
+    function toggleRubricActions() {
+        const selectedChangeType = changeTypeSelect.value;
+        const rubricActions = document.querySelectorAll(".rubric-action");
+
+        rubricActions.forEach(action => {
+            action.style.display = selectedChangeType === "Новая орг-ция" ? "none" : "inline-block";
+        });
+    }
+
+    changeTypeSelect.addEventListener("change", toggleRubricActions);
+    toggleRubricActions(); // Вызываем при загрузке
+    }
