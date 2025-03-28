@@ -115,6 +115,7 @@ def create_vorwand():
     data = request.get_json()
     city_code = data.get("city_code")
     rubrics = data.get("rubrics", [])  # Получаем список рубрик
+    xml_override = data.get("xml_override")  # ✅ Новый параметр
 
     cookies = session.get("cookie", "")
     if not cookies:
@@ -125,15 +126,18 @@ def create_vorwand():
 
     biz = BizAccount()
     try:
-        response = biz.bizaccount_create_vorwands(cookies, city_code, rubrics)
+        # ✅ Передаём xml_override в метод
+        response = biz.bizaccount_create_vorwands(cookies, city_code, rubrics, xml_override=xml_override)
 
         if response is None:
-            return jsonify({"error": "Ошибка генерации XML"}), 500  # ✅ Проверяем, что response не None
+            return jsonify({"error": "Ошибка генерации XML"}), 500
 
         if isinstance(response, tuple) and response[1] == 401:
-            return jsonify(response[0]), 401  # Перенаправляем на страницу авторизации
+            return jsonify(response[0]), 401
 
-        return jsonify({"vorwand_id": response})
+        # ✅ Возвращаем полный ответ, включая vorwand_id и xml_request
+        return jsonify(response)
+
     except ValueError as e:
         return jsonify({"error": str(e)}), 400
     except Exception as e:

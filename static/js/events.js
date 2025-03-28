@@ -35,38 +35,18 @@ export function setupCreateVorwand() {
     }
 
     createVorwandButton.addEventListener("click", async function () {
-        if (!validateFields()) return;
+        if (!validateFields()) return; // ✅ Прекращаем выполнение, если есть ошибки
 
         createVorwandButton.disabled = true;
         createVorwandButton.textContent = "Ожидание...";
 
         try {
             const { requestData, changeType } = collectFormData();
-            const response = await fetch(`/api/${changeType === "Новая орг-ция" ? "create-vorwand" : "update-vorwand"}`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(requestData),
-            });
-
-            const data = await response.json();
-
-            if (response.status === 404) {
-                alert("Ошибка: Фирма не найдена!");
-                return;
-            }
-
-            if (!response.ok) {
-                throw new Error(data.error || "Неизвестная ошибка");
-            }
-
+            const data = await createVorwand(requestData, changeType);
             updateUIAfterCreation(data);
         } catch (error) {
-            if (error.message.includes("Фирма не найдена")) {
-                alert(error.message);
-            } else {
-                console.error("Ошибка при запросе:", error);
-                alert("Ошибка: " + error.message);
-            }
+            console.error("Ошибка при запросе:", error);
+            alert("Ошибка: " + error.message);
         } finally {
             resetButton(createVorwandButton);
         }

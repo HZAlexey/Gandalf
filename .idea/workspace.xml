@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c1d6ab89-cb29-4858-ba44-b040ffa26107" name="Changes" comment="правил ошибки после рефакторинга. Теперь алерты корректно показывают каких обязательных полей не хватает">
-      <change afterPath="$PROJECT_DIR$/data.py" afterDir="false" />
+    <list default="true" id="c1d6ab89-cb29-4858-ba44-b040ffa26107" name="Changes" comment="теперь рубрики добавляются или удаляются динамически и для update_vorwand_request">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/VorwandsCreateAPI/Bizaccount.py" beforeDir="false" afterPath="$PROJECT_DIR$/VorwandsCreateAPI/Bizaccount.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/events.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/events.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/static/js/form.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/js/ui.js" beforeDir="false" afterPath="$PROJECT_DIR$/static/js/ui.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1742651687010</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="теперь рубрики добавляются или удаляются динамически и для update_vorwand_request">
+      <option name="closed" value="true" />
+      <created>1742655186364</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1742655186364</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -202,6 +212,7 @@
     <MESSAGE value="Добавил кнопку просмотра сормировавшегося запроса" />
     <MESSAGE value="Появилось модальное окно, в котором будет появляться OriginValue" />
     <MESSAGE value="правил ошибки после рефакторинга. Теперь алерты корректно показывают каких обязательных полей не хватает" />
-    <option name="LAST_COMMIT_MESSAGE" value="правил ошибки после рефакторинга. Теперь алерты корректно показывают каких обязательных полей не хватает" />
+    <MESSAGE value="теперь рубрики добавляются или удаляются динамически и для update_vorwand_request" />
+    <option name="LAST_COMMIT_MESSAGE" value="теперь рубрики добавляются или удаляются динамически и для update_vorwand_request" />
   </component>
 </project>

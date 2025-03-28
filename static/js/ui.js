@@ -16,6 +16,11 @@ export function updateUIAfterCreation(data) {
     } else {
         vorwandLink.style.display = "none";
     }
+
+    // Сохраняем XML-запрос, если он есть
+    if (data.xml_request) {
+        window.savedXMLRequest = data.xml_request;
+    }
 }
 
 
@@ -170,29 +175,28 @@ export function showError(message, inputElement) {
 export function setupModal() {
     const modalContainer = document.getElementById("modal-container");
     const modalText = document.getElementById("modal-text");
-    const viewButton = document.getElementById("view-vorwand-button");
+    const viewButton = document.getElementById("view-vorwand-button"); // Кнопка для показа модального окна
     const closeButton = document.getElementById("close-modal");
     const saveButton = document.getElementById("save-modal");
 
-    let savedText = ""; // Переменная для хранения текста
-
     viewButton.addEventListener("click", function () {
         if (modalContainer.style.display === "block") {
-            modalContainer.style.display = "none"; // Закрываем окно, если оно уже открыто
+            modalContainer.style.display = "none"; // Закрываем окно
         } else {
-            modalText.value = savedText || "Здесь будет ваш запрос..."; // Показываем сохраненный текст
+            // Показываем XML-запрос
+            modalText.value = window.savedXMLRequest || "XML-запрос отсутствует.";
             modalContainer.style.display = "block"; // Открываем окно
         }
     });
 
     closeButton.addEventListener("click", function () {
-        modalContainer.style.display = "none"; // Закрываем окно без сохранения
+        modalContainer.style.display = "none"; // Закрываем окно
     });
 
     saveButton.addEventListener("click", function () {
-        savedText = modalText.value; // Сохраняем изменения
-        modalContainer.style.display = "none"; // Закрываем окно после сохранения
-        console.log("✅ Сохраненный текст:", savedText);
+        window.savedXMLRequest = modalText.value; // Обновляем XML-запрос
+        modalContainer.style.display = "none"; // Закрываем окно
+        console.log("✅ Сохраненный XML-запрос:", window.savedXMLRequest);
     });
 }
 

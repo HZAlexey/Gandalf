@@ -20,10 +20,16 @@ export function collectFormData() {
         }
     });
 
+    console.log("📌 Перед отправкой rubrics:", selectedRubrics);
 
     let requestData = { city_code: selectedCityCode, rubrics: selectedRubrics };
     if (changeType === "Обновить данные орг-ции") {
         requestData.card_syncode = cardSyncode;
+    }
+
+    // 💡 Добавляем отредактированный XML, если он есть
+    if (window.savedXMLRequest) {
+        requestData.xml_override = window.savedXMLRequest;
     }
 
     return { requestData, changeType };
